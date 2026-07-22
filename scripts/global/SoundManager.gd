@@ -8,6 +8,7 @@ enum SoundID {
 	Click,
 	UiClick,
 	Poof,
+	Bike
 }
 
 func _ready() -> void:
