@@ -22,3 +22,4 @@ mono_crash.*.json
 ##Code Viewers .git/ is ignored by default, .sln should be tracked for C#
 .vs/
 .idea/
+.vscode/
