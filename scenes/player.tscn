@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://ck5lenyq7mwgt"]
+
+[ext_resource type="Texture2D" uid="uid://bwgeej1oi7176" path="res://assets/sprites/bike.png" id="1_3vyb7"]
+[ext_resource type="Script" uid="uid://hhrx1fpkgj13" path="res://scripts/player.gd" id="1_g2els"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g2els"]
+radius = 8.0
+height = 32.0
+
+[node name="Player" type="CharacterBody2D" unique_id=827946957]
+motion_mode = 1
+script = ExtResource("1_g2els")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2041248135]
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_g2els")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1249956203]
+texture = ExtResource("1_3vyb7")
+
+[node name="Debug" type="Node2D" parent="." unique_id=1480179975]
+
+[node name="Direction" type="Line2D" parent="Debug" unique_id=1147984006]
+points = PackedVector2Array(0, 0, -34, 0)
+width = 2.0
+default_color = Color(0, 0, 1, 1)
+
+[node name="BrakeDirection" type="Line2D" parent="Debug" unique_id=1829941750]
+points = PackedVector2Array(0, 0, -34, 0)
+width = 2.0
+default_color = Color(1, 1, 0, 1)
+
+[node name="TargetDirection" type="Line2D" parent="Debug" unique_id=158613308]
+points = PackedVector2Array(0, 0, -34, 0)
+width = 2.0
+default_color = Color(1, 0, 1, 1)
+
+[node name="VelDirection" type="Line2D" parent="Debug" unique_id=149897205]
+points = PackedVector2Array(0, 0, -34, 0)
+width = 1.0
+
+[node name="InputDirectionForward" type="Line2D" parent="Debug" unique_id=596735906]
+points = PackedVector2Array(0, 0, -34, 0)
+width = 2.0
+default_color = Color(0, 1, 0, 1)
+
+[node name="InputDirectionSide" type="Line2D" parent="Debug" unique_id=2086762790]
+points = PackedVector2Array(0, 0, -34, 0)
+width = 2.0
+default_color = Color(1, 0, 0, 1)
