@@ -14,6 +14,14 @@ config/name="GMTK2026"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+FmodManager="*uid://cds10pm7hwn3p"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/fmod/plugin.cfg")
+
 [physics]
 
 3d/physics_engine="Jolt Physics"
