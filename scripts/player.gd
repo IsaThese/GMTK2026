@@ -1,9 +1,10 @@
+class_name  base_player
 extends CharacterBody2D
 
 const VELOCITY = 40
-const ACCELERATION = 120
+const ACCELERATION = 800
 const DECELERATION = 200
-const MAX_SPEED = 250
+@export var MAX_SPEED = 600
 const MAX_TURN_SPEED = PI / 2
 
 var facing := Vector2.LEFT
@@ -16,7 +17,7 @@ func _init() -> void:
 func get_turning_speed() -> float:
 	if self.velocity.length_squared() < 1:
 		return INF
-	return lerp(MAX_TURN_SPEED, deg_to_rad(30), inverse_lerp(0, MAX_SPEED, self.velocity.length()))
+	return lerp(MAX_TURN_SPEED, deg_to_rad(240), inverse_lerp(0, MAX_SPEED, self.velocity.length()))
 
 func _physics_process(delta: float) -> void:
 	var direction := Input.get_vector("left", "right", "up", "down")

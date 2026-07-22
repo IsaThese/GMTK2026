@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://ck5lenyq7mwgt" path="res://scenes/player.tscn" id="1_o5qli"]
 [ext_resource type="Texture2D" uid="uid://dhcwybhoxgwhe" path="res://icon.svg" id="2_0wfyh"]
+[ext_resource type="Script" uid="uid://chxsv23lq2mav" path="res://scenes/EmitEngineFMOD.gd" id="2_sugp2"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0wfyh"]
 friction = 0.8
@@ -12,8 +13,21 @@ size = Vector2(120, 120)
 
 [node name="Main" type="Node2D" unique_id=84656414]
 
+[node name="FmodBankLoader" type="FmodBankLoader" parent="." unique_id=211822403]
+bank_paths = ["res://FMOD/Desktop/SFX.bank", "res://FMOD/Desktop/Master.strings.bank", "res://FMOD/Desktop/Master.bank"]
+
+[node name="FmodListener2D" type="FmodListener2D" parent="." unique_id=1405315220]
+
 [node name="Player" parent="." unique_id=1030725472 instance=ExtResource("1_o5qli")]
 position = Vector2(553, 299)
+
+[node name="FmodEventEmitter2D" type="FmodEventEmitter2D" parent="Player" unique_id=2110126405]
+event_name = "event:/EngineRunning"
+event_guid = "{93335348-d869-43b9-bef9-29bdcde73cad}"
+fmod_parameters/Speed/id = -854255419747928504
+fmod_parameters/Speed = 0.4
+fmod_parameters/Speed/variant_type = 3
+script = ExtResource("2_sugp2")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=335277434]
 physics_material_override = SubResource("PhysicsMaterial_0wfyh")
