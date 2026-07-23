@@ -1,100 +1,137 @@
-class_name  base_player
-extends CharacterBody2D
+class_name PlayerClass extends CharacterBody2D
 
-const VELOCITY = 40
-const ACCELERATION = 800
-const DECELERATION = 200
-@export var MAX_SPEED = 600
-const MAX_TURN_SPEED = PI / 2
+# Settings
+@export var UseSteeringControls := false
+@export_range(0, 1, 0.05) var TurningManeuverability := 0.8
 
+const ACCELERATION = 400
+const DECELERATION = 300
+const MAX_SPEED = 300
+const MAX_TURN_SPEED = PI
+
+# Signal emitted when crashing against something
+signal collision_detected(impact_force: float, player_speed: float)
+
+# Members
 var facing := Vector2.LEFT
 
-signal CarCrashed
-
-# var velocity := Vector2.ZERO
 
 func _init() -> void:
 	velocity = Vector2.ZERO
 
-func get_turning_speed() -> float:
-	if self.velocity.length_squared() < 1:
-		return INF
-	return lerp(MAX_TURN_SPEED, deg_to_rad(240), inverse_lerp(0, MAX_SPEED, self.velocity.length()))
+
+func _get_turning_speed() -> float:
+	if UseSteeringControls:
+		return PI / 2
+	else:
+		if velocity.length_squared() < 1:
+			return INF
+		return lerp(MAX_TURN_SPEED, deg_to_rad(240), inverse_lerp(0, MAX_SPEED, velocity.length()))
+
 
 func _physics_process(delta: float) -> void:
+	## Read basic player inputs
 	var direction := Input.get_vector("left", "right", "up", "down")
-	var braking := Input.is_action_pressed("brake")
-	
-	#if direction.x < -0.7 and direction.y > 0.7 and self.velocity.length_squared() < 1:
-		#breakpoint
+	var braking_hard := Input.is_action_pressed("brake")
 
-	var dot = direction.dot(self.facing)
-	
-	var direction_forward = direction.project(self.facing)
-	var direction_sideways = direction - direction_forward
-	$Debug/InputDirectionForward.points[1] = direction_forward * 20
-	$Debug/InputDirectionSide.points[1] = direction_sideways * 20
-	
-	var is_forward_input := direction.length_squared() > 0 and ((direction_forward.length_squared() > 0 and dot > 0) or self.velocity.length_squared() < 1)
-	
-	var target_facing = (direction if direction_sideways.length_squared() < 0.1 else direction_sideways)
-	if target_facing.length_squared() == 0 and velocity.length() > 10:
-		target_facing = velocity.normalized()
-	$Debug/TargetDirection.points[1] = target_facing * 80
-	
-	var rotation_to_apply = self.facing.angle_to(target_facing)
-	if target_facing.length() > 0 and (self.velocity.length_squared() < 1 or abs(rotation_to_apply) < deg_to_rad(135)):
-		var actual_rotation = sign(rotation_to_apply) * min(abs(rotation_to_apply), get_turning_speed() * delta)
-		self.facing = self.facing.rotated(actual_rotation)
-	
-	var velocity_change := Vector2.ZERO
-	
-	$Debug/BrakeDirection.points[1] = Vector2.ZERO
-	#if is_forward_input:
-	if braking or (direction_forward.length() == 0) or (dot < 0):
-		$Debug/BrakeDirection.points[1] = -self.velocity.normalized() * 40
-		velocity_change = (-self.velocity.normalized()) * DECELERATION * delta
+	var current_forward_velocity = velocity.length() * velocity.dot(facing)
+
+	var forward_vel: float = 0  # Added forward velocity
+	var reverse_vel: float = 0  # Added reverse velocity
+	var braking_vel: float = 0  # Added velocity against current velocity direction
+	var turning_rad: float = 0  # Turning angle in radians
+
+	## Translate inputs into different velocities depending on controls
+
+	if UseSteeringControls:
+		# Steering controls use separate controls for steering and accelerating/reversing
+		var steering = Input.get_axis("steer_left", "steer_right")
+		turning_rad = steering * MAX_TURN_SPEED * delta
+		$Debug/TargetDirection.points[1] = facing.rotated(turning_rad / delta) * 80
+
+		forward_vel += Input.get_action_strength("steer_drive") * ACCELERATION * delta
+
+		if current_forward_velocity > 0:
+			reverse_vel += Input.get_action_strength("steer_reverse") * DECELERATION * delta
+			if direction.length_squared() == 0:  # No input pressed
+				braking_vel += DECELERATION * delta
+		if braking_hard:
+			braking_vel += DECELERATION * delta
+
+		$Debug/InputDirectionForward.points[1] = facing * forward_vel
+		$Debug/InputDirectionSide.points[1] = facing.rotated(steering * PI / 2) * 40
 	else:
-		velocity_change += (direction_forward * ACCELERATION * delta)
-	velocity_change += (direction_sideways * DECELERATION * delta)
-		#self.velocity = self.velocity.limit_length(MAX_SPEED)
-	#else:
-		# Regular deceleration
-		#velocity_change = (-self.velocity.normalized()) * DECELERATION * delta
-		#if amount.length() > self.velocity.length():
-			#self.velocity = Vector2.ZERO
-		#else:
-			#self.velocity += amount
-	velocity_change = velocity_change.limit_length(max(ACCELERATION, DECELERATION) * delta)
-	
-	if velocity_change.dot(self.velocity) < -0.99 and velocity_change.length_squared() > self.velocity.length_squared():
-		self.velocity = Vector2.ZERO
-	elif (self.velocity + velocity_change).length() > MAX_SPEED:
-		var no_vel = velocity_change.length()
-		var full_vel = (self.velocity + velocity_change).length()
-		var limit = inverse_lerp(no_vel, full_vel, MAX_SPEED)
-		self.velocity = velocity * limit + velocity_change
+		# WASD controls split the inputs into forward and sideways vectors
+		var direction_forward = direction.project(facing)
+		var direction_sideways = direction - direction_forward
+		$Debug/InputDirectionForward.points[1] = direction_forward * 20
+		$Debug/InputDirectionSide.points[1] = direction_sideways * 20
+
+		var target_facing = (direction if direction_sideways.length_squared() < 0.1 else direction_sideways)
+		if target_facing.length_squared() == 0 and velocity.length() > 10:
+			target_facing = velocity.normalized()
+		$Debug/TargetDirection.points[1] = target_facing * 80
+
+		var rotation_to_apply = facing.angle_to(target_facing)
+		if target_facing.length() > 0 and (velocity.length_squared() < 1 or abs(rotation_to_apply) < deg_to_rad(135)):
+			turning_rad = sign(rotation_to_apply) * min(abs(rotation_to_apply), _get_turning_speed() * delta)
+
+		if braking_hard:
+			braking_vel += DECELERATION * delta
+		if current_forward_velocity > 0 and ((direction.dot(facing) < 0) or (direction_forward.length() == 0)):
+			if direction.dot(facing) < 0:
+				reverse_vel += DECELERATION * delta
+			if direction_forward.length() == 0:
+				braking_vel += DECELERATION * delta
+		else:
+			forward_vel += direction_forward.length() * ACCELERATION * delta
+
+	## Apply player inputs
+
+	facing = facing.rotated(turning_rad)
+	# Redirect velocity towards facing direction
+	var velocity_delta_angle = velocity.angle_to(facing)
+	var velocity_adjustment = sign(velocity_delta_angle) * min(abs(velocity_delta_angle), MAX_TURN_SPEED * delta * TurningManeuverability)
+	velocity = velocity.rotated(velocity_adjustment)
+
+	forward_vel = min(forward_vel, ACCELERATION)
+
+	var braking_vec = -velocity.normalized() * abs(braking_vel)
+
+	$Debug/BrakeDirection.points[1] = braking_vec.normalized() * 80
+
+	if braking_vel > velocity.length():
+		velocity = Vector2.ZERO
+	if current_forward_velocity > 0 and reverse_vel > current_forward_velocity:
+		velocity = Vector2.ZERO
+	elif current_forward_velocity < 0 and forward_vel > abs(current_forward_velocity):
+		velocity = Vector2.ZERO
 	else:
-		self.velocity += velocity_change
-	
-	#self.position += self.velocity
-	#print(self.velocity, self.position)
-	#move_and_slide() # self.velocity * delta)
-	var collision = move_and_collide(self.velocity * delta)
+		var delta_vel = facing * (forward_vel - reverse_vel) + braking_vec
+		# TODO: do we need the velocity limit prioritizing inputs?
+		velocity = (velocity + delta_vel).limit_length(MAX_SPEED)
+
+	# Move character and detect collisions
+	var collision = move_and_collide(velocity * delta)
 	if collision:
-		var head_on = self.velocity.normalized().dot(-collision.get_normal())
+		var head_on = velocity.normalized().dot(-collision.get_normal())
+		emit_signal("collision_detected", abs(head_on), get_speed_percentage())
 		# kill velocity if head on
-		self.velocity *= (1 - abs(head_on))
-		var hit_angle = self.velocity.angle_to(collision.get_normal().rotated(PI / 2))
+		velocity *= (1 - abs(head_on))
+		var hit_angle = velocity.angle_to(collision.get_normal().rotated(PI / 2))
 		var deviation = 2 * hit_angle
-		self.velocity = self.velocity.rotated(deviation)
+		velocity = velocity.rotated(deviation)
 		#This is for managing crash sound
-		emit_signal("CarCrashed")
 		#print(collision.get_normal())
-		#self.position = collision.get_position()
-	
-func _process(delta: float) -> void:
-	$Debug/Direction.points[1] = self.facing * 40
-	$Debug/VelDirection.points[1] = self.velocity
-	$CollisionShape2D.rotation = Vector2.UP.angle_to(self.facing)
-	$Sprite2D.rotation = Vector2.LEFT.angle_to(self.facing)
+		#position = collision.get_position()
+
+
+func _process(_delta: float) -> void:
+	$Debug/Direction.points[1] = facing * 40
+	$Debug/VelDirection.points[1] = velocity
+	$CollisionShape2D.rotation = Vector2.UP.angle_to(facing)
+	$Sprite2D.rotation = Vector2.LEFT.angle_to(facing)
+
+
+func get_speed_percentage() -> float:
+	return velocity.length() / MAX_SPEED
