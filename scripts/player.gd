@@ -9,6 +9,8 @@ const MAX_TURN_SPEED = PI / 2
 
 var facing := Vector2.LEFT
 
+signal CarCrashed
+
 # var velocity := Vector2.ZERO
 
 func _init() -> void:
@@ -86,6 +88,8 @@ func _physics_process(delta: float) -> void:
 		var hit_angle = self.velocity.angle_to(collision.get_normal().rotated(PI / 2))
 		var deviation = 2 * hit_angle
 		self.velocity = self.velocity.rotated(deviation)
+		#This is for managing crash sound
+		emit_signal("CarCrashed")
 		#print(collision.get_normal())
 		#self.position = collision.get_position()
 	

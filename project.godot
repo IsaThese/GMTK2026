@@ -32,6 +32,10 @@ buses/default_bus_layout="uid://ca3djydaywkul"
 
 FmodManager="*uid://cds10pm7hwn3p"
 
+[dotnet]
+
+project/assembly_name="GMTK2026"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/fmod/plugin.cfg")
