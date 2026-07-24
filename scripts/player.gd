@@ -6,8 +6,14 @@ class_name PlayerClass extends CharacterBody2D
 
 const ACCELERATION = 400
 const DECELERATION = 300
-const MAX_SPEED = 300
+const MAX_SPEED = 300 
 const MAX_TURN_SPEED = PI
+
+# Setting 1 Acc 250 Dec 300 Max 650 Turn pi*7 - isaac, Skillful Drifting to stop and move
+#Setting 2 Acc 400 Dec 300 Max 300 Turn Pi - zeroji
+#setting 3 Acc 340 Dec 100 Max 800 Turn pi*2 - Isaac, Faster, Harder to control
+#Setting 4 Acc 120 Dec 700 Max 1000 Turn pi*14 - Skillful Stopping and Drifing, Fastest
+
 
 # Signal emitted when crashing against something
 signal collision_detected(impact_force: float, player_speed: float)

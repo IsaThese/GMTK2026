@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://ck5lenyq7mwgt" path="res://scenes/player.tscn" id="1_o5qli"]
 [ext_resource type="Texture2D" uid="uid://dhcwybhoxgwhe" path="res://icon.svg" id="2_0wfyh"]
-[ext_resource type="Script" uid="uid://chxsv23lq2mav" path="res://scenes/EmitEngineFMOD.gd" id="2_sugp2"]
+[ext_resource type="Script" uid="uid://chxsv23lq2mav" path="res://scenes/EmitEngine.gd" id="2_sugp2"]
 [ext_resource type="Script" uid="uid://wskfdf0kneps" path="res://scenes/CrashSoundEmitter.gd" id="3_tbgi4"]
 [ext_resource type="AudioStream" uid="uid://cehc8p6k680lj" path="res://assets/sounds/level1_music.wav" id="4_jyhfs"]
 
@@ -15,32 +15,20 @@ size = Vector2(120, 120)
 
 [node name="Main" type="Node2D" unique_id=84656414]
 
-[node name="FmodBankLoader" type="FmodBankLoader" parent="." unique_id=211822403]
-bank_paths = ["res://FMOD/Desktop/SFX.bank", "res://FMOD/Desktop/Master.strings.bank", "res://FMOD/Desktop/Master.bank"]
-
-[node name="FmodListener2D" type="FmodListener2D" parent="." unique_id=1405315220]
-
 [node name="Player" parent="." unique_id=1030725472 instance=ExtResource("1_o5qli")]
 position = Vector2(553, 299)
 
-[node name="EngineSoundEmitter" type="FmodEventEmitter2D" parent="Player" unique_id=2110126405]
-event_name = "event:/EngineRunning"
-event_guid = "{93335348-d869-43b9-bef9-29bdcde73cad}"
-fmod_parameters/Speed/id = -854255419747928504
-fmod_parameters/Speed = 0.4
-fmod_parameters/Speed/variant_type = 3
-script = ExtResource("2_sugp2")
-
-[node name="CrashSoundEmitter" type="FmodEventEmitter2D" parent="Player" unique_id=1610274936]
-event_name = "event:/CarCrash"
-event_guid = "{914503d3-f5cc-49ad-813d-c225302b6c94}"
+[node name="EngineSounds" type="Node" parent="Player" unique_id=699857288]
 script = ExtResource("3_tbgi4")
+
+[node name="CrashSounds" type="Node" parent="Player" unique_id=622684473]
+script = ExtResource("2_sugp2")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=335277434]
 physics_material_override = SubResource("PhysicsMaterial_0wfyh")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1970217136]
-polygon = PackedVector2Array(24, 24, 1142, 10, 1164, -23, -48, -23, -30, 694, 1199, 684, 1170, -57, 1132, -32, 1122, 621, 25, 620)
+polygon = PackedVector2Array(24, 24, 936.3745, 12.574921, 1142, 10, 1164, -23, -48, -23, -30, 694, 1199, 684, 1170, -57, 1132, -32, 1122, 621, 25, 620)
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=2094582473]
 position = Vector2(368.00006, 381)

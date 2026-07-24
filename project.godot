@@ -30,15 +30,20 @@ buses/default_bus_layout="uid://ca3djydaywkul"
 
 [autoload]
 
-FmodManager="*uid://cds10pm7hwn3p"
+SoundManager="*uid://dm4cki08eccp5"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/borderless=true
+window/size/window_width_override=1280
+window/size/window_height_override=720
+window/stretch/mode="canvas_items"
 
 [dotnet]
 
 project/assembly_name="GMTK2026"
-
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/fmod/plugin.cfg")
 
 [input]
 
