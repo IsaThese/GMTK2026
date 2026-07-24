@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://wskfdf0kneps" path="res://scenes/CrashSoundEmitter.gd" id="3_tbgi4"]
 [ext_resource type="AudioStream" uid="uid://cehc8p6k680lj" path="res://assets/sounds/level1_music.wav" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://bldwt37h3nvk7" path="res://scenes/zone_1.tscn" id="5_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://cqynp8x866dno" path="res://scenes/mini_map.tscn" id="6_tefeu"]
 
 [node name="Main" type="Node2D" unique_id=84656414]
 
@@ -28,3 +29,10 @@ volume_db = -2.427
 bus = &"Music"
 
 [node name="Zone1" parent="." unique_id=662683130 instance=ExtResource("5_tbgi4")]
+metadata/_edit_lock_ = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1983740822]
+
+[node name="MiniMap" parent="CanvasLayer" unique_id=248463519 node_paths=PackedStringArray("ZoneNode", "PlayerNode") instance=ExtResource("6_tefeu")]
+ZoneNode = NodePath("../../Zone1")
+PlayerNode = NodePath("../../Player")
