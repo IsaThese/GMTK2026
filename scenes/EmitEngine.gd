@@ -20,7 +20,7 @@ func _process(_delta: float) -> void:
 	
 	SoundManager.PlaySound(
 		Sound.ID.EngineRunning,
-		Player.global_position,
+		Player,
 		volume,
 		pitch
 	)

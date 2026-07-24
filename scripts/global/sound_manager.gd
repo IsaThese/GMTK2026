@@ -5,6 +5,7 @@ extends Node
 #Enum Sound.ID Is possible to not be initialized
 var sounds: Dictionary[Sound.ID, SoundData] = {}
 var loaded_streams: Array[AudioStream] = []
+var sound_nodes: Dictionary[Sound.ID, AudioStreamPlayer2D] = {}
 
 
 class SoundData:
@@ -71,18 +72,17 @@ func register() -> void:
 
 # Volume varies from 0-1, MUST ADD NUMBER SUFFIX!, The name of the node is 
 #Sound.ID to string
-func PlaySound(id: Sound.ID, position: Vector2, volume: float = 1.0,
+func PlaySound(id: Sound.ID, parent: Node2D, volume: float = 1.0,
 pitch: float = 1,
 parameter: float = 0.0, _playIfAlreadyPlaying: bool = false) -> void:
-	assert(position != null, "Position for sound shouldn't be null!")
+	assert(parent != null, "Parent for sound shouldn't be null!")
 	var sound_data: SoundData = getSoundDataFromID(id)
 	if sound_data == null:
 		return 
 	if(sound_data.hasParameter) :
 		sound_data.parameterValue = parameter
-	var expected_node_name := str(id)
-	if(has_node(expected_node_name) && !_playIfAlreadyPlaying):
-		var stream := get_node(expected_node_name) as AudioStreamPlayer2D
+	if sound_nodes.has(id) && !_playIfAlreadyPlaying:
+		var stream := sound_nodes.get(id) as AudioStreamPlayer2D
 		assert(stream != null, "Was expecting node with similar name to be AudioStreamPlayer2D")
 		stream.pitch_scale = pitch
 		stream.volume_db = linear_to_db(volume)
@@ -90,7 +90,7 @@ parameter: float = 0.0, _playIfAlreadyPlaying: bool = false) -> void:
 	
 	
 	var newSoundInstance := AudioStreamPlayer2D.new()
-	newSoundInstance.name = expected_node_name
+	newSoundInstance.name = str(id)
 	var base_path: String = sound_data.path.get_basename() 
 	var extension: String = sound_data.path.get_extension() 
 	var soundPath: String = base_path + str(sound_data.currentNoise) + "." + extension
@@ -102,13 +102,13 @@ parameter: float = 0.0, _playIfAlreadyPlaying: bool = false) -> void:
 	sound_data.playNextNoise() #Shuffling may be an option, but idc
 	newSoundInstance.volume_db = linear_to_db(volume)
 	newSoundInstance.pitch_scale = pitch
-	add_child(newSoundInstance)
-	newSoundInstance.global_position = position
-	newSoundInstance.finished.connect(newSoundInstance.queue_free)
+	parent.add_child(newSoundInstance)
+	sound_nodes.set(id, newSoundInstance)
+	newSoundInstance.finished.connect(StopSound.bind(id))
 	newSoundInstance.play()
 	
 func StopSound(id: Sound.ID) -> void:
-	var expected_name := str(id)
-	if has_node(expected_name):
-		var node_to_stop := get_node(expected_name)
+	if sound_nodes.has(id):
+		var node_to_stop := sound_nodes.get(id) as AudioStreamPlayer2D
+		sound_nodes.erase(id)
 		node_to_stop.queue_free()

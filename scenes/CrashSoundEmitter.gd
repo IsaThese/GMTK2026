@@ -17,6 +17,6 @@ func CarCrash(force: float, player_speed: float) -> void:
 	 #player_speed is speed before the collision (between 0 and 1)
 	var pitch : float = randf_range(.5, 1)
 	if player_speed > 0.1 && player_speed < midBound:
-		SoundManager.PlaySound(Sound.ID.CarCrash, Player.global_position, Volume, pitch)
+		SoundManager.PlaySound(Sound.ID.CarCrash, Player, Volume, pitch)
 	elif player_speed > midBound :
-		SoundManager.PlaySound(Sound.ID.FastCrash, Player.global_position, Volume, pitch)
+		SoundManager.PlaySound(Sound.ID.FastCrash, Player, Volume, pitch)
