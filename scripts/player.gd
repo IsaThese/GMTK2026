@@ -4,15 +4,16 @@ class_name PlayerClass extends CharacterBody2D
 @export var UseSteeringControls := false
 @export_range(0, 1, 0.05) var TurningManeuverability := 0.8
 
-const ACCELERATION = 400
+const ACCELERATION = 300
 const DECELERATION = 300
-const MAX_SPEED = 300 
+const MAX_SPEED = 400 
 const MAX_TURN_SPEED = PI
 
 # Setting 1 Acc 250 Dec 300 Max 650 Turn pi*7 - isaac, Skillful Drifting to stop and move
 #Setting 2 Acc 400 Dec 300 Max 300 Turn Pi - zeroji
 #setting 3 Acc 340 Dec 100 Max 800 Turn pi*2 - Isaac, Faster, Harder to control
 #Setting 4 Acc 120 Dec 700 Max 1000 Turn pi*14 - Skillful Stopping and Drifing, Fastest
+#Setting 5 Acc 200 Dec 800 Max 450 turn pi*40 -Somewhat bumps, but can navigate tight corners 
 
 
 # Signal emitted when crashing against something
