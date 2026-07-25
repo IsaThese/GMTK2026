@@ -3,6 +3,7 @@ class_name PlayerClass extends CharacterBody2D
 # Settings
 @export_range(0, 1, 0.05) var TurningManeuverability := 0.8
 
+var inventory:InventoryManager
 const ACCELERATION = 300
 const DECELERATION = 300
 const MAX_SPEED = 400 

@@ -2,6 +2,10 @@
 
 [ext_resource type="Texture2D" uid="uid://bwgeej1oi7176" path="res://assets/sprites/bike.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://hhrx1fpkgj13" path="res://scripts/player.gd" id="1_g2els"]
+[ext_resource type="Script" uid="uid://0o7gler3pr0u" path="res://scripts/inventory/inventory_manager.gd" id="2_qhqgy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g2els"]
+radius = 9.234716
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g2els"]
 radius = 8.0
@@ -10,6 +14,15 @@ height = 32.0
 [node name="Player" type="CharacterBody2D" unique_id=827946957]
 motion_mode = 1
 script = ExtResource("1_g2els")
+
+[node name="InventoryManager" type="Node" parent="." unique_id=793261818]
+script = ExtResource("2_qhqgy")
+
+[node name="CollectionArea" type="Area2D" parent="." unique_id=556281858]
+
+[node name="DetectItems" type="CollisionShape2D" parent="CollectionArea" unique_id=1791575618]
+scale = Vector2(2.5, 2.5)
+shape = SubResource("CircleShape2D_g2els")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2041248135]
 rotation = -1.5707964

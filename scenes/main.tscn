@@ -1,11 +1,18 @@
 [gd_scene format=3 uid="uid://bs8s04pdoy5r0"]
 
 [ext_resource type="PackedScene" uid="uid://ck5lenyq7mwgt" path="res://scenes/player.tscn" id="1_o5qli"]
-[ext_resource type="Script" uid="uid://chxsv23lq2mav" path="res://scenes/EmitEngine.gd" id="2_sugp2"]
-[ext_resource type="Script" uid="uid://wskfdf0kneps" path="res://scenes/CrashSoundEmitter.gd" id="3_tbgi4"]
+[ext_resource type="Script" uid="uid://chxsv23lq2mav" path="res://scripts/sound/EmitEngine.gd" id="2_sugp2"]
+[ext_resource type="Script" uid="uid://wskfdf0kneps" path="res://scripts/sound/CrashSoundEmitter.gd" id="3_tbgi4"]
 [ext_resource type="AudioStream" uid="uid://cehc8p6k680lj" path="res://assets/sounds/level1_music.wav" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://bldwt37h3nvk7" path="res://scenes/zone_1.tscn" id="5_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://cqynp8x866dno" path="res://scenes/mini_map.tscn" id="6_tefeu"]
+[ext_resource type="Script" uid="uid://ds47hnp7a6qvn" path="res://scripts/inventory/items_collected.gd" id="7_o6xl0"]
+[ext_resource type="FontFile" uid="uid://ct518wg2icm2y" path="res://assets/fonts/PixeloidMono-nAOpP.ttf" id="7_tipki"]
+[ext_resource type="PackedScene" uid="uid://d1vwxf574myr2" path="res://scenes/PizzaItem.tscn" id="10_choun"]
+
+[sub_resource type="Theme" id="Theme_85g3d"]
+default_font = ExtResource("7_tipki")
+default_font_size = 60
 
 [node name="Main" type="Node2D" unique_id=84656414]
 
@@ -31,8 +38,41 @@ bus = &"Music"
 [node name="Zone1" parent="." unique_id=662683130 instance=ExtResource("5_tbgi4")]
 metadata/_edit_lock_ = true
 
+[node name="PizzaItem" parent="Zone1" unique_id=115788678 instance=ExtResource("10_choun")]
+position = Vector2(2, -88)
+
+[node name="PizzaItem2" parent="Zone1" unique_id=418530508 instance=ExtResource("10_choun")]
+position = Vector2(-248, -24)
+
+[node name="PizzaItem3" parent="Zone1" unique_id=1256074955 instance=ExtResource("10_choun")]
+position = Vector2(-504, -40)
+
+[node name="PizzaItem4" parent="Zone1" unique_id=243043183 instance=ExtResource("10_choun")]
+position = Vector2(-8, -424)
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1983740822]
 
 [node name="MiniMap" parent="CanvasLayer" unique_id=248463519 node_paths=PackedStringArray("ZoneNode", "PlayerNode") instance=ExtResource("6_tefeu")]
 ZoneNode = NodePath("../../Zone1")
 PlayerNode = NodePath("../../Player")
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=1605000859]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_85g3d")
+
+[node name="ItemsCollected" type="Label" parent="CanvasLayer/Control" unique_id=1214847683]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 119.0
+grow_vertical = 0
+size_flags_horizontal = 0
+text = "Pizza:"
+script = ExtResource("7_o6xl0")
