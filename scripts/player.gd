@@ -1,7 +1,6 @@
 class_name PlayerClass extends CharacterBody2D
 
 # Settings
-@export var UseSteeringControls := false
 @export_range(0, 1, 0.05) var TurningManeuverability := 0.8
 
 const ACCELERATION = 300
@@ -28,7 +27,7 @@ func _init() -> void:
 
 
 func _get_turning_speed() -> float:
-	if UseSteeringControls:
+	if Controls.UseSteering:
 		return PI / 2
 	else:
 		if velocity.length_squared() < 1:
@@ -50,7 +49,7 @@ func _physics_process(delta: float) -> void:
 
 	## Translate inputs into different velocities depending on controls
 
-	if UseSteeringControls:
+	if Controls.UseSteering:
 		# Steering controls use separate controls for steering and accelerating/reversing
 		var steering = Input.get_axis("steer_left", "steer_right")
 		turning_rad = steering * MAX_TURN_SPEED * delta

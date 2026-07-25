@@ -91,6 +91,7 @@ parameter: float = 0.0, _playIfAlreadyPlaying: bool = false) -> void:
 	
 	var newSoundInstance := AudioStreamPlayer2D.new()
 	newSoundInstance.name = str(id)
+	newSoundInstance.bus = "SFX"
 	var base_path: String = sound_data.path.get_basename() 
 	var extension: String = sound_data.path.get_extension() 
 	var soundPath: String = base_path + str(sound_data.currentNoise) + "." + extension
