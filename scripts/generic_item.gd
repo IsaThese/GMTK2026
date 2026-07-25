@@ -16,4 +16,6 @@ func collectQuery(area:Area2D) -> void:
 	assert(player != null, "Collecting query found player to be null")
 	set_deferred("monitoring", false)
 	player.inventory.addItem(Name, Amount)
+	SoundManager.PlaySound(Sound.ID.Pickup, player,1,1,
+	0, true)
 	get_parent().queue_free()

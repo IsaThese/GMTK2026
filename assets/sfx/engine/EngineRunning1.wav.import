@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://cryk0qdymfq8t"
-path="res://.godot/imported/EngineRunning1.wav-842b6b0fb2f17ac3c4733f0976510d78.sample"
+uid="uid://dqy27m4iu2v5r"
+path="res://.godot/imported/EngineRunning1.wav-6b7926d91f414d8eb58d443ca0b27910.sample"
 
 [deps]
 
-source_file="res://assets/sfx/engine/EngineRunning1.wav"
-dest_files=["res://.godot/imported/EngineRunning1.wav-842b6b0fb2f17ac3c4733f0976510d78.sample"]
+source_file="res://assets/sfx/Engine/EngineRunning1.wav"
+dest_files=["res://.godot/imported/EngineRunning1.wav-6b7926d91f414d8eb58d443ca0b27910.sample"]
 
 [params]
 

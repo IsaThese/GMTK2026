@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://ds47hnp7a6qvn" path="res://scripts/inventory/items_collected.gd" id="7_o6xl0"]
 [ext_resource type="FontFile" uid="uid://ct518wg2icm2y" path="res://assets/fonts/PixeloidMono-nAOpP.ttf" id="7_tipki"]
 [ext_resource type="PackedScene" uid="uid://d1vwxf574myr2" path="res://scenes/PizzaItem.tscn" id="10_choun"]
+[ext_resource type="AudioStream" uid="uid://4fj7whvcipub" path="res://assets/sfx/Ticking/Ticking1.wav" id="10_ya4ey"]
 
 [sub_resource type="Theme" id="Theme_85g3d"]
 default_font = ExtResource("7_tipki")
@@ -35,7 +36,8 @@ drag_vertical_enabled = true
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=281214681]
 stream = ExtResource("4_jyhfs")
-volume_db = -2.427
+volume_db = -2.0
+autoplay = true
 bus = &"Music"
 
 [node name="Zone1" parent="." unique_id=662683130 instance=ExtResource("5_tbgi4")]
@@ -90,3 +92,8 @@ grow_vertical = 0
 size_flags_horizontal = 0
 text = "Pizza:"
 script = ExtResource("7_o6xl0")
+
+[node name="Ticking" type="AudioStreamPlayer" parent="." unique_id=713140104]
+stream = ExtResource("10_ya4ey")
+volume_db = -8.0
+autoplay = true

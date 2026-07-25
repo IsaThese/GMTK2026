@@ -18,6 +18,7 @@ func collectItem(itemName:Item.ID, amount:int) -> void:
 	if(!is_visible_in_tree()):
 		visible = true
 	updateUI()
+	
 
 func updateUI() -> void:
 	var emptyText := ""

@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://cux638h2uytwn"
-path="res://.godot/imported/Crash1.wav-2e403649817e7d1811aed895be2ad69b.sample"
+uid="uid://4fj7whvcipub"
+path="res://.godot/imported/Ticking1.wav-dedd8110ca02f50632f963f67d2f5119.sample"
 
 [deps]
 
-source_file="res://assets/sfx/Car_crash/Crash1.wav"
-dest_files=["res://.godot/imported/Crash1.wav-2e403649817e7d1811aed895be2ad69b.sample"]
+source_file="res://assets/sfx/Ticking/Ticking1.wav"
+dest_files=["res://.godot/imported/Ticking1.wav-dedd8110ca02f50632f963f67d2f5119.sample"]
 
 [params]
 

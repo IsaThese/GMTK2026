@@ -5,5 +5,8 @@ enum ID {
 	EngineStart,
 	EngineEnd,
 	CarCrash,
-	FastCrash
+	FastCrash,
+	Ding,
+	Ticking,
+	Pickup
 }
