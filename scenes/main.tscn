@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bs8s04pdoy5r0"]
 
 [ext_resource type="PackedScene" uid="uid://ck5lenyq7mwgt" path="res://scenes/player.tscn" id="1_o5qli"]
+[ext_resource type="Script" uid="uid://c7smr2wbmsuk" path="res://scripts/main.gd" id="1_o6xl0"]
 [ext_resource type="Script" uid="uid://chxsv23lq2mav" path="res://scripts/sound/EmitEngine.gd" id="2_sugp2"]
 [ext_resource type="Script" uid="uid://wskfdf0kneps" path="res://scripts/sound/CrashSoundEmitter.gd" id="3_tbgi4"]
 [ext_resource type="AudioStream" uid="uid://cehc8p6k680lj" path="res://assets/sounds/level1_music.wav" id="4_jyhfs"]
@@ -15,6 +16,7 @@ default_font = ExtResource("7_tipki")
 default_font_size = 60
 
 [node name="Main" type="Node2D" unique_id=84656414]
+script = ExtResource("1_o6xl0")
 
 [node name="Player" parent="." unique_id=1030725472 instance=ExtResource("1_o5qli")]
 z_index = 1
@@ -26,6 +28,7 @@ script = ExtResource("3_tbgi4")
 script = ExtResource("2_sugp2")
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=364711367]
+process_callback = 0
 position_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
@@ -52,9 +55,20 @@ position = Vector2(-8, -424)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1983740822]
 
-[node name="MiniMap" parent="CanvasLayer" unique_id=248463519 node_paths=PackedStringArray("ZoneNode", "PlayerNode") instance=ExtResource("6_tefeu")]
-ZoneNode = NodePath("../../Zone1")
-PlayerNode = NodePath("../../Player")
+[node name="MiniMap" parent="CanvasLayer" unique_id=248463519 node_paths=PackedStringArray("zone_node", "player_node", "target_node") instance=ExtResource("6_tefeu")]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -264.0
+offset_right = 0.0
+offset_bottom = 264.0
+grow_horizontal = 0
+zone_node = NodePath("../../Zone1")
+player_node = NodePath("../../Player")
+target_node = NodePath("../../Customer")
+map_size = Vector2(256, 256)
+
+[node name="Customer" type="Node2D" parent="." unique_id=464213208]
 
 [node name="Control" type="Control" parent="CanvasLayer" unique_id=1605000859]
 layout_mode = 3
