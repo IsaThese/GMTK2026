@@ -8,5 +8,6 @@ enum ID {
 	FastCrash,
 	Ding,
 	Ticking,
-	Pickup
+	Pickup,
+	BikePedal
 }

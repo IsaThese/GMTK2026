@@ -63,11 +63,12 @@ func _ready() -> void:
 	sounds[Sound.ID.Ding] = SoundData.new("res://assets/sfx/Ding/Ding.wav", 3)
 	sounds[Sound.ID.Ticking] = SoundData.new("res://assets/sfx/Ticking/Ticking.wav")
 	sounds[Sound.ID.Pickup] = SoundData.new("res://assets/sfx/PickUp/PickUp.wav", 4)
+	sounds[Sound.ID.BikePedal] = SoundData.new("res://assets/sfx/BikePedal/BikePedal.wav")
 	
 func getSoundDataFromID(id: int) -> SoundData:
 	if sounds.has(id):
 		return sounds[id]
-	print("Sound.ID: " + str(id) + " has no data assigned")
+	push_warning("Sound.ID: " + Sound.ID.keys()[id] + " has no data assigned")
 	return null
 
 func register() -> void:

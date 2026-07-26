@@ -1,15 +1,17 @@
 extends Node
 
-var Player: PlayerClass
-var newVolume : float = .2;
-var threshold : float = .4;
+var _player: PlayerClass
+var _is_car : bool
+#var newVolume : float = .2; Not used calculated by speed
 
 func _ready() -> void:
-	Player = get_parent() as PlayerClass
-	assert(Player != null, "Player was null for EngineSoundEmitter")
+	_player = get_parent() as PlayerClass
+	assert(_player != null, "Player was null for EngineSounds")
+	_is_car = !_player.is_bike
 	
 func _process(_delta: float) -> void:
-	var percentage := Player.get_speed_percentage()
+	if(!_is_car) : SoundManager.StopSound(Sound.ID.EngineRunning); return;
+	var percentage := _player.get_speed_percentage()
 	if percentage <= 0:
 		SoundManager.StopSound(Sound.ID.EngineRunning)
 		return
@@ -20,7 +22,7 @@ func _process(_delta: float) -> void:
 	
 	SoundManager.PlaySound(
 		Sound.ID.EngineRunning,
-		Player,
+		_player,
 		volume,
 		pitch
 	)

@@ -33,4 +33,4 @@ func getItemAmount(itemName:Item.ID) -> int:
 	
 func checkForNegatives(itemName:Item.ID, amount:int):
 	assert(amount > 0, "Can't use add/remove function with negative or 0 numbers")
-	assert(inventory.has(itemName), "Item registration failed")
+	assert(inventory.has(itemName), "Item registration failed, in _ready of inv manager")

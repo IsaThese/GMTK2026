@@ -3,6 +3,11 @@ extends Node2D
 @onready var zone: Node2D = $Zone2
 @onready var customer: Node2D = $Customer
 
+var Paused:bool
+
+func _enter_tree() -> void:
+	EventBus.GameLose.connect(_game_lose)
+
 func _ready() -> void:
 	# Change clear color to sidewalk
 	RenderingServer.set_default_clear_color(Color("#949494"))
@@ -14,3 +19,8 @@ func _ready() -> void:
 	else:
 		var marker = customer_positions.get_children().pick_random()
 		customer.global_position = marker.global_position
+		
+func _game_lose() -> void:
+	get_tree().paused = true
+	Paused = true
+	pass
