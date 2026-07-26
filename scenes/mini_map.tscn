@@ -73,11 +73,9 @@ color = Color(0.5, 0.5, 0.5, 1)
 tile_set = ExtResource("1_n5jno")
 
 [node name="MiniPlayer" type="Sprite2D" parent="." unique_id=1443330966]
-visible = false
 texture = ExtResource("3_mdj5p")
 
 [node name="MiniTarget" type="Sprite2D" parent="." unique_id=70878763]
-visible = false
 texture = ExtResource("4_4k04u")
 
 [node name="TargetAnimationPlayer" type="AnimationPlayer" parent="." unique_id=272252892]

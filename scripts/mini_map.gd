@@ -25,23 +25,29 @@ func _ready() -> void:
 		size = map_size + Vector2(stylebox.border_width_left + stylebox.border_width_right, stylebox.border_width_top + stylebox.border_width_bottom)
 		border_offset = Vector2(stylebox.border_width_left, stylebox.border_width_top)
 
-	if player_node == null and player_sprite != null:
-		player_sprite.visible = false
-	
-	if target_node == null and target_sprite != null:
-		target_sprite.visible = false
+	if not Engine.is_editor_hint():
+		if player_node == null and player_sprite != null:
+			player_sprite.visible = false
+		
+		if target_node == null and target_sprite != null:
+			target_sprite.visible = false
 	
 	if zone_node:
-		for child in zone_node.get_children():
-			if child is TileMapLayer:
-				source_map = child
-				print_debug("Minimap from zone with area ", source_map.get_used_rect())
-				map_total_size = source_map.get_used_rect().size * dest_map.tile_set.tile_size
-				source_map_top_left = source_map.get_used_rect().position
-				for coords in source_map.get_used_cells():
-					dest_map.set_cell(coords - source_map_top_left, source_id, source_map.get_cell_atlas_coords(coords))
-				return
+		update_minimap()
+		return
 	push_warning("Minimap", self, "does not have a valid zone")
+
+
+func update_minimap():
+	dest_map.clear()
+	for child in zone_node.get_children():
+		if child is TileMapLayer:
+			source_map = child
+			print_debug("Minimap from zone with area ", source_map.get_used_rect())
+			map_total_size = source_map.get_used_rect().size * dest_map.tile_set.tile_size
+			source_map_top_left = source_map.get_used_rect().position
+			for coords in source_map.get_used_cells():
+				dest_map.set_cell(coords - source_map_top_left, source_id, source_map.get_cell_atlas_coords(coords))
 
 
 func _process(_delta: float) -> void:

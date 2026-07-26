@@ -87,8 +87,11 @@ position = Vector2(64, 1728)
 position = Vector2(560, 1344)
 
 [node name="Customer" type="Node2D" parent="Game" unique_id=464213208]
+z_index = 1
 
 [node name="Area2D" type="Area2D" parent="Game/Customer" unique_id=1367553259]
+collision_layer = 8
+collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Game/Customer/Area2D" unique_id=233705184]
 shape = SubResource("CircleShape2D_trceg")
@@ -266,6 +269,49 @@ text = "There has to be a better way..."
 label_settings = SubResource("LabelSettings_jkv2x")
 horizontal_alignment = 1
 
+[node name="WinMenu" type="Control" parent="CanvasLayer" unique_id=874134851]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("11_trceg")
+
+[node name="Label" type="Label" parent="CanvasLayer/WinMenu" unique_id=644284009]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -87.5
+offset_top = -11.5
+offset_right = 87.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Delivered just in time!"
+
+[node name="TimeLabel" type="Label" parent="CanvasLayer/WinMenu" unique_id=114836188]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -532.0
+offset_top = 36.0
+offset_right = 561.0
+offset_bottom = 76.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Your time:"
+label_settings = SubResource("LabelSettings_jkv2x")
+horizontal_alignment = 1
+
+[connection signal="body_entered" from="Game/Customer/Area2D" to="." method="_on_final_area_entered"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/HBoxContainer/Pause" to="CanvasLayer/PauseMenu" method="_on_pause_pressed"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/HBoxContainer/Settings" to="CanvasLayer/PauseMenu" method="_on_settings_pressed"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/HBoxContainer/Title" to="CanvasLayer/PauseMenu" method="_on_title_pressed"]
