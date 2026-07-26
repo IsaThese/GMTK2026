@@ -139,15 +139,13 @@ func _physics_process(delta: float) -> void:
 	var collision = move_and_collide(velocity * delta)
 	if collision:
 		var head_on = velocity.normalized().dot(-collision.get_normal())
+		#This is for managing crash sound
 		emit_signal("collision_detected", abs(head_on), get_speed_percentage())
 		# kill velocity if head on
 		velocity *= (1 - abs(head_on))
 		var hit_angle = velocity.angle_to(collision.get_normal().rotated(PI / 2))
 		var deviation = 2 * hit_angle
 		velocity = velocity.rotated(deviation)
-		#This is for managing crash sound
-		#print(collision.get_normal())
-		#position = collision.get_position()
 
 
 func _process(_delta: float) -> void:

@@ -54,7 +54,7 @@ func _game_lose() -> void:
 	$CanvasLayer/MiniMap.visible = !Paused
 	$CanvasLayer/GameOverMenu.visible = Paused
 	Controls.TotalFails += 1
-	if Controls.TotalFails >= Controls.BikeUnlock:
+	if Controls.TotalFails >= Controls.BikeUnlock and not Controls.BikeCity:
 		var index = (Controls.TotalFails - Controls.BikeUnlock) % len(hint_texts)
 		$CanvasLayer/GameOverMenu/HintLabel.text = hint_texts[index]
 		$CanvasLayer/GameOverMenu/HintLabel.show()

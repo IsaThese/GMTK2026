@@ -9,7 +9,7 @@ const base_dir := Vector2.DOWN
 @export var is_static: bool = false
 
 func _ready() -> void:
-	sprite.region_rect.position.y = 0 if is_player else sprite.region_rect.size.y
+	sprite.region_rect.position.y = 0.0 if is_player else sprite.region_rect.size.y
 	
 	if is_player:
 		$StaticBody.queue_free()

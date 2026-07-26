@@ -54,6 +54,7 @@ tile_map_data = PackedByteArray("AAAIAEYAAAADAAYAAAAIAEcAAAADAAYAAAAIAEgAAAADAAY
 tile_set = ExtResource("1_q83xm")
 
 [node name="Pizzeria" type="Sprite2D" parent="." unique_id=2081772855]
+z_index = 2
 position = Vector2(192, 2240)
 texture = ExtResource("2_n5gnf")
 metadata/_edit_lock_ = true
