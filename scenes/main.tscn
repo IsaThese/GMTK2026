@@ -13,25 +13,48 @@
 [ext_resource type="Theme" uid="uid://bnxru8f1toqjo" path="res://themes/UI_Theme.tres" id="11_trceg"]
 [ext_resource type="Script" uid="uid://4xkdigyoejoh" path="res://scenes/time_text.gd" id="12_a8y0u"]
 [ext_resource type="Script" uid="uid://dit1ierxu70mp" path="res://scenes/end_game_timer.gd" id="13_trceg"]
+[ext_resource type="PackedScene" uid="uid://jq77w8u8w7x5" path="res://scenes/settings.tscn" id="14_a8y0u"]
+[ext_resource type="Script" uid="uid://cieo74kf8plv2" path="res://scenes/pause_menu.gd" id="14_jkv2x"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_trceg"]
+radius = 16.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a8y0u"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.76666665, 0.5, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="LabelSettings" id="LabelSettings_jkv2x"]
+font_size = 32
 
 [node name="Main" type="Node2D" unique_id=84656414]
 process_mode = 3
 script = ExtResource("1_o6xl0")
 
-[node name="Player" parent="." unique_id=1030725472 instance=ExtResource("1_o5qli")]
+[node name="Game" type="Node2D" parent="." unique_id=604791296]
+process_mode = 1
+
+[node name="Player" parent="Game" unique_id=1030725472 instance=ExtResource("1_o5qli")]
 z_index = 1
 position = Vector2(197, 2325)
 
-[node name="BikePedal" type="Node" parent="Player" unique_id=470699996]
+[node name="BikePedal" type="Node" parent="Game/Player" unique_id=470699996]
 script = ExtResource("3_eb6dy")
 
-[node name="CrashSounds" type="Node" parent="Player" unique_id=699857288]
+[node name="CrashSounds" type="Node" parent="Game/Player" unique_id=699857288]
 script = ExtResource("3_tbgi4")
 
-[node name="EngineSounds" type="Node" parent="Player" unique_id=622684473]
+[node name="EngineSounds" type="Node" parent="Game/Player" unique_id=622684473]
 script = ExtResource("2_sugp2")
 
-[node name="Camera2D" type="Camera2D" parent="Player" unique_id=364711367]
+[node name="Camera2D" type="Camera2D" parent="Game/Player" unique_id=364711367]
 zoom = Vector2(2, 2)
 process_callback = 0
 limit_left = 0
@@ -42,32 +65,46 @@ position_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 
-[node name="EndGameTimer" type="Timer" parent="Player" unique_id=1092386326]
+[node name="EndGameTimer" type="Timer" parent="Game/Player" unique_id=1092386326]
 wait_time = 20.0
 one_shot = true
 autostart = true
 script = ExtResource("13_trceg")
+
+[node name="Zone2" parent="Game" unique_id=2120611318 instance=ExtResource("6_ya4ey")]
+metadata/_edit_lock_ = true
+
+[node name="PizzaItem" parent="Game/Zone2" unique_id=115788678 instance=ExtResource("10_choun")]
+position = Vector2(570, 1680)
+
+[node name="PizzaItem2" parent="Game/Zone2" unique_id=418530508 instance=ExtResource("10_choun")]
+position = Vector2(320, 1744)
+
+[node name="PizzaItem3" parent="Game/Zone2" unique_id=1256074955 instance=ExtResource("10_choun")]
+position = Vector2(64, 1728)
+
+[node name="PizzaItem4" parent="Game/Zone2" unique_id=243043183 instance=ExtResource("10_choun")]
+position = Vector2(560, 1344)
+
+[node name="Customer" type="Node2D" parent="Game" unique_id=464213208]
+
+[node name="Area2D" type="Area2D" parent="Game/Customer" unique_id=1367553259]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Game/Customer/Area2D" unique_id=233705184]
+shape = SubResource("CircleShape2D_trceg")
+
+[node name="PanelContainer" type="PanelContainer" parent="Game/Customer" unique_id=1647065260]
+offset_left = -17.0
+offset_top = -17.0
+offset_right = 17.0
+offset_bottom = 17.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_a8y0u")
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=281214681]
 stream = ExtResource("4_jyhfs")
 volume_db = -5.0
 autoplay = true
 bus = &"Music"
-
-[node name="Zone2" parent="." unique_id=2120611318 instance=ExtResource("6_ya4ey")]
-metadata/_edit_lock_ = true
-
-[node name="PizzaItem" parent="Zone2" unique_id=115788678 instance=ExtResource("10_choun")]
-position = Vector2(570, 1680)
-
-[node name="PizzaItem2" parent="Zone2" unique_id=418530508 instance=ExtResource("10_choun")]
-position = Vector2(320, 1744)
-
-[node name="PizzaItem3" parent="Zone2" unique_id=1256074955 instance=ExtResource("10_choun")]
-position = Vector2(64, 1728)
-
-[node name="PizzaItem4" parent="Zone2" unique_id=243043183 instance=ExtResource("10_choun")]
-position = Vector2(560, 1344)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1983740822]
 
@@ -79,9 +116,9 @@ offset_left = -104.0
 offset_right = 0.0
 offset_bottom = 200.0
 grow_horizontal = 0
-zone_node = NodePath("../../Zone2")
-player_node = NodePath("../../Player")
-target_node = NodePath("../../Customer")
+zone_node = NodePath("../../Game/Zone2")
+player_node = NodePath("../../Game/Player")
+target_node = NodePath("../../Game/Customer")
 map_size = Vector2(96, 192)
 
 [node name="Control" type="Control" parent="CanvasLayer" unique_id=1605000859]
@@ -119,7 +156,68 @@ grow_vertical = 0
 text = "Time Left:"
 script = ExtResource("12_a8y0u")
 
-[node name="PauseMenu" type="Control" parent="CanvasLayer" unique_id=256948815]
+[node name="PauseMenu" type="Control" parent="CanvasLayer" unique_id=569043444]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("14_jkv2x")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/PauseMenu" unique_id=1031794386]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5019608)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PauseMenu" unique_id=1195858402]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 80.0
+offset_bottom = 162.0
+grow_horizontal = 2
+theme_override_constants/separation = 80
+alignment = 1
+
+[node name="Pause" type="Button" parent="CanvasLayer/PauseMenu/HBoxContainer" unique_id=649352644]
+layout_mode = 2
+theme = ExtResource("11_trceg")
+text = "Resume"
+
+[node name="Settings" type="Button" parent="CanvasLayer/PauseMenu/HBoxContainer" unique_id=135905989]
+layout_mode = 2
+theme = ExtResource("11_trceg")
+text = "Settings"
+
+[node name="Quit" type="Button" parent="CanvasLayer/PauseMenu/HBoxContainer" unique_id=507525184]
+layout_mode = 2
+theme = ExtResource("11_trceg")
+text = "Quit
+"
+
+[node name="Settings" parent="CanvasLayer/PauseMenu" unique_id=1866817678 instance=ExtResource("14_a8y0u")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -230.0
+offset_top = -137.0
+offset_right = 230.0
+offset_bottom = 137.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameOverMenu" type="Control" parent="CanvasLayer" unique_id=256948815]
 visible = false
 layout_mode = 3
 anchors_preset = 15
@@ -129,7 +227,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("11_trceg")
 
-[node name="Label" type="Label" parent="CanvasLayer/PauseMenu" unique_id=1180598060]
+[node name="Label" type="Label" parent="CanvasLayer/GameOverMenu" unique_id=1180598060]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -144,4 +242,24 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Press Space To Restart"
 
-[node name="Customer" type="Node2D" parent="." unique_id=464213208]
+[node name="HintLabel" type="Label" parent="CanvasLayer/GameOverMenu" unique_id=1266054525]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -532.0
+offset_top = 36.0
+offset_right = 561.0
+offset_bottom = 76.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "There has to be a better way..."
+label_settings = SubResource("LabelSettings_jkv2x")
+horizontal_alignment = 1
+
+[connection signal="pressed" from="CanvasLayer/PauseMenu/HBoxContainer/Pause" to="CanvasLayer/PauseMenu" method="_on_pause_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseMenu/HBoxContainer/Settings" to="CanvasLayer/PauseMenu" method="_on_settings_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseMenu/HBoxContainer/Quit" to="CanvasLayer/PauseMenu" method="_on_quit_pressed"]

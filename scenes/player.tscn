@@ -31,6 +31,7 @@ scale = Vector2(2.5, 2.5)
 shape = SubResource("CircleShape2D_g2els")
 
 [node name="Debug" type="Node2D" parent="." unique_id=1480179975]
+visible = false
 
 [node name="Direction" type="Line2D" parent="Debug" unique_id=1147984006]
 points = PackedVector2Array(0, 0, -34, 0)

@@ -23,6 +23,7 @@ corner_radius_bottom_left = 16
 
 [node name="Settings" type="Control" unique_id=1866817678]
 process_mode = 3
+custom_minimum_size = Vector2(460, 274)
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_r6d6q")
