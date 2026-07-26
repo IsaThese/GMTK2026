@@ -55,11 +55,11 @@ class SoundData:
 
 #THE FILE MUST START END WITHOUT THE NUMBER
 func _ready() -> void:
-	sounds[Sound.ID.EngineStart] = SoundData.new("res://assets/sfx/engine/EngineStart.wav")
-	sounds[Sound.ID.EngineRunning] = SoundData.new("res://assets/sfx/engine/EngineRunning.wav")
-	sounds[Sound.ID.EngineEnd] = SoundData.new("res://assets/sfx/engine/EngineEnd.wav")
-	sounds[Sound.ID.CarCrash] = SoundData.new("res://assets/sfx/car_crash/Crash.wav")
-	sounds[Sound.ID.FastCrash] = SoundData.new("res://assets/sfx/car_crash/FastCrash.wav")
+	sounds[Sound.ID.EngineStart] = SoundData.new("res://assets/sfx/Engine/EngineStart.wav")
+	sounds[Sound.ID.EngineRunning] = SoundData.new("res://assets/sfx/Engine/EngineRunning.wav")
+	sounds[Sound.ID.EngineEnd] = SoundData.new("res://assets/sfx/Engine/EngineEnd.wav")
+	sounds[Sound.ID.CarCrash] = SoundData.new("res://assets/sfx/Car_crash/Crash.wav")
+	sounds[Sound.ID.FastCrash] = SoundData.new("res://assets/sfx/Car_crash/FastCrash.wav")
 	sounds[Sound.ID.Ding] = SoundData.new("res://assets/sfx/Ding/Ding.wav", 3)
 	sounds[Sound.ID.Ticking] = SoundData.new("res://assets/sfx/Ticking/Ticking.wav")
 	sounds[Sound.ID.Pickup] = SoundData.new("res://assets/sfx/PickUp/PickUp.wav", 4)
