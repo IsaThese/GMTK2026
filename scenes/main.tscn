@@ -159,6 +159,7 @@ script = ExtResource("12_a8y0u")
 [node name="PauseMenu" type="Control" parent="CanvasLayer" unique_id=569043444]
 process_mode = 3
 visible = false
+z_index = 2
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -195,6 +196,11 @@ text = "Resume"
 layout_mode = 2
 theme = ExtResource("11_trceg")
 text = "Settings"
+
+[node name="Title" type="Button" parent="CanvasLayer/PauseMenu/HBoxContainer" unique_id=1368600844]
+layout_mode = 2
+theme = ExtResource("11_trceg")
+text = "Title"
 
 [node name="Quit" type="Button" parent="CanvasLayer/PauseMenu/HBoxContainer" unique_id=507525184]
 layout_mode = 2
@@ -262,4 +268,5 @@ horizontal_alignment = 1
 
 [connection signal="pressed" from="CanvasLayer/PauseMenu/HBoxContainer/Pause" to="CanvasLayer/PauseMenu" method="_on_pause_pressed"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/HBoxContainer/Settings" to="CanvasLayer/PauseMenu" method="_on_settings_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseMenu/HBoxContainer/Title" to="CanvasLayer/PauseMenu" method="_on_title_pressed"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/HBoxContainer/Quit" to="CanvasLayer/PauseMenu" method="_on_quit_pressed"]

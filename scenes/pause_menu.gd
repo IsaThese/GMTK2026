@@ -23,5 +23,11 @@ func _on_settings_pressed() -> void:
 	$Settings.show()
 
 
+func _on_title_pressed() -> void:
+	get_tree().paused = false
+	get_tree().change_scene_to_file("res://scenes/title.tscn")
+
+
 func _on_quit_pressed() -> void:
+	get_tree().paused = false
 	get_tree().quit()
