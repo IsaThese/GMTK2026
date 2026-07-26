@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://chfiordypihuk"]
 
-[ext_resource type="Texture2D" uid="uid://dt7qpf4a0m5vk" path="res://assets/badtitle.png" id="1_4ignj"]
 [ext_resource type="Script" uid="uid://db4083lsv70gg" path="res://scripts/title.gd" id="1_wosw1"]
+[ext_resource type="Texture2D" uid="uid://bom47e83gjpdk" path="res://assets/title.png" id="2_p6dhs"]
 [ext_resource type="PackedScene" uid="uid://jq77w8u8w7x5" path="res://scenes/settings.tscn" id="3_p6dhs"]
+[ext_resource type="Texture2D" uid="uid://m3t1fujxgqfv" path="res://assets/title_lock.png" id="4_pyl7j"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4ignj"]
 
@@ -43,16 +44,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_4ignj")
+texture = ExtResource("2_p6dhs")
 expand_mode = 1
 stretch_mode = 6
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1948304246]
 layout_mode = 0
-offset_left = 876.0
-offset_top = 113.0
-offset_right = 1200.0
-offset_bottom = 386.0
+offset_left = 772.0
+offset_top = 423.0
+offset_right = 1096.0
+offset_bottom = 696.0
+scale = Vector2(0.9047124, 0.8813018)
 theme_override_constants/separation = 16
 
 [node name="StartButton" type="Button" parent="VBoxContainer" unique_id=1995364997]
@@ -78,20 +80,56 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_4ignj")
 
 [node name="Settings" parent="." unique_id=1866817678 instance=ExtResource("3_p6dhs")]
 layout_mode = 0
-offset_left = 734.0
-offset_top = 413.0
-offset_right = 734.0
-offset_bottom = 413.0
+offset_left = 306.0
+offset_top = 434.0
+offset_right = 766.0
+offset_bottom = 708.0
 
 [node name="CreditsLabel" type="Label" parent="." unique_id=530775500]
 layout_mode = 0
-offset_left = 70.0
-offset_top = 655.0
-offset_right = 531.0
-offset_bottom = 694.0
+offset_left = 774.0
+offset_top = 585.0
+offset_right = 1066.0
+offset_bottom = 676.0
 theme_override_styles/normal = SubResource("StyleBoxFlat_p6dhs")
-text = "Woah look at all the time we had to make these credits!"
+text = "Art & Game Design:               8huva
+Lead programming & CI:       Zeroji
+Music, SFX, additional code: Isaac"
+
+[node name="CarButton" type="Button" parent="." unique_id=484494147]
+layout_mode = 0
+offset_left = 788.0
+offset_top = 231.0
+offset_right = 1112.0
+offset_bottom = 287.0
+scale = Vector2(0.646121, 3.15527)
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxEmpty_4ignj")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_wosw1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_4ignj")
+
+[node name="BikeButton" type="Button" parent="." unique_id=622535564]
+layout_mode = 0
+offset_left = 1019.00006
+offset_top = 231.0
+offset_right = 1343.0
+offset_bottom = 287.0
+scale = Vector2(0.646121, 3.15527)
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxEmpty_4ignj")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_wosw1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_4ignj")
+
+[node name="BikeLock" type="TextureRect" parent="." unique_id=685631225]
+layout_mode = 0
+offset_left = 1027.0
+offset_top = 237.0
+offset_right = 1222.0
+offset_bottom = 401.0
+texture = ExtResource("4_pyl7j")
 
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="pressed" from="CarButton" to="." method="_on_car_button_pressed"]
+[connection signal="pressed" from="BikeButton" to="." method="_on_bike_button_pressed"]
