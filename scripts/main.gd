@@ -19,8 +19,10 @@ func _ready() -> void:
 	else:
 		var marker = customer_positions.get_children().pick_random()
 		customer.global_position = marker.global_position
-		
+	
+	SoundManager.PlaySound(Sound.ID.Ticking, $Player)
 func _game_lose() -> void:
 	get_tree().paused = true
+	SoundManager.StopSound(Sound.ID.Ticking)
+	SoundManager.PlaySound(Sound.ID.Alarm, $Player)
 	Paused = true
-	pass

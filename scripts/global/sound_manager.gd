@@ -64,6 +64,7 @@ func _ready() -> void:
 	sounds[Sound.ID.Ticking] = SoundData.new("res://assets/sfx/Ticking/Ticking.wav")
 	sounds[Sound.ID.Pickup] = SoundData.new("res://assets/sfx/PickUp/PickUp.wav", 4)
 	sounds[Sound.ID.BikePedal] = SoundData.new("res://assets/sfx/BikePedal/BikePedal.wav")
+	sounds[Sound.ID.Alarm] = SoundData.new("res://assets/sfx/Alarm/Alarm.wav")
 	
 func getSoundDataFromID(id: int) -> SoundData:
 	if sounds.has(id):

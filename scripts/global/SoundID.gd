@@ -9,5 +9,6 @@ enum ID {
 	Ding,
 	Ticking,
 	Pickup,
-	BikePedal
+	BikePedal,
+	Alarm
 }
