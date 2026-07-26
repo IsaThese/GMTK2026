@@ -111,7 +111,7 @@ texture = ExtResource("1_rjoe3")
 hframes = 2
 vframes = 4
 region_enabled = true
-region_rect = Rect2(0, 0, 96, 192)
+region_rect = Rect2(0, 192, 96, 192)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1675777522]
 root_node = NodePath("../Sprite2D")

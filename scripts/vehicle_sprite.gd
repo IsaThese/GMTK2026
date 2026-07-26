@@ -6,6 +6,7 @@ extends Node2D
 const base_dir := Vector2.DOWN
 
 @export var is_player: bool = false
+@export var is_static: bool = false
 
 func _ready() -> void:
 	sprite.region_rect.position.y = 0 if is_player else sprite.region_rect.size.y
@@ -27,3 +28,5 @@ func _process(_delta: float) -> void:
 	else:
 		anim.play("move_right")
 		sprite.rotation_degrees = 90
+	if is_static:
+		get_tree().create_timer(0.1).timeout.connect(anim.pause)

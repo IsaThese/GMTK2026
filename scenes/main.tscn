@@ -20,7 +20,7 @@ script = ExtResource("1_o6xl0")
 
 [node name="Player" parent="." unique_id=1030725472 instance=ExtResource("1_o5qli")]
 z_index = 1
-position = Vector2(175, 2321)
+position = Vector2(197, 2325)
 
 [node name="BikePedal" type="Node" parent="Player" unique_id=470699996]
 script = ExtResource("3_eb6dy")
@@ -55,6 +55,7 @@ autoplay = true
 bus = &"Music"
 
 [node name="Zone2" parent="." unique_id=2120611318 instance=ExtResource("6_ya4ey")]
+metadata/_edit_lock_ = true
 
 [node name="PizzaItem" parent="Zone2" unique_id=115788678 instance=ExtResource("10_choun")]
 position = Vector2(570, 1680)

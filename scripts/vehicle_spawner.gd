@@ -1,6 +1,5 @@
 class_name VehicleSpawner extends Path2D
 
-@export var path: Path2D = null
 @export_range(1, 10, .5) var spawn_interval = 2.
 
 const BikeScene = preload("uid://berks61lodc3y")

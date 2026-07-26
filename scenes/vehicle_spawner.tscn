@@ -2,10 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ca8hdcnb64qgv" path="res://scripts/vehicle_spawner.gd" id="1_t0fty"]
 
-[sub_resource type="Curve2D" id="Curve2D_t0fty"]
-
 [node name="VehicleSpawner" type="Path2D" unique_id=450481522]
-curve = SubResource("Curve2D_t0fty")
 script = ExtResource("1_t0fty")
 
 [node name="Timer" type="Timer" parent="." unique_id=1306161720]
