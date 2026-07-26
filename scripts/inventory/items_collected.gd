@@ -25,5 +25,5 @@ func updateUI() -> void:
 	for item in inventory.inventory.keys():
 		var item_name = Item.ID.keys()[item]
 		var amount := inventory.inventory[item]
-		emptyText += item_name + ": " + str(amount) + "\n"
+		emptyText += item_name + ": " + str(amount)
 	self.text = emptyText

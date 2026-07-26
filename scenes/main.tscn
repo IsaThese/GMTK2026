@@ -2,8 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://ck5lenyq7mwgt" path="res://scenes/player.tscn" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://c7smr2wbmsuk" path="res://scripts/main.gd" id="1_o6xl0"]
-[ext_resource type="Script" uid="uid://chxsv23lq2mav" path="res://scripts/sound/EmitEngine.gd" id="2_sugp2"]
-[ext_resource type="Script" uid="uid://wskfdf0kneps" path="res://scripts/sound/CrashSoundEmitter.gd" id="3_tbgi4"]
+[ext_resource type="Script" uid="uid://chxsv23lq2mav" path="res://scripts/sound/emit_engine.gd" id="2_sugp2"]
+[ext_resource type="Script" uid="uid://b0i2m8jybylww" path="res://scripts/sound/bike_pedal.gd" id="3_eb6dy"]
+[ext_resource type="Script" uid="uid://wskfdf0kneps" path="res://scripts/sound/crash_sound_emitter.gd" id="3_tbgi4"]
 [ext_resource type="AudioStream" uid="uid://cehc8p6k680lj" path="res://assets/sounds/level1_music.wav" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://cqynp8x866dno" path="res://scenes/mini_map.tscn" id="6_tefeu"]
 [ext_resource type="PackedScene" uid="uid://cwy5wy7ukixf0" path="res://scenes/zone_2.tscn" id="6_ya4ey"]
@@ -11,22 +12,28 @@
 [ext_resource type="FontFile" uid="uid://ct518wg2icm2y" path="res://assets/fonts/PixeloidMono-nAOpP.ttf" id="7_tipki"]
 [ext_resource type="PackedScene" uid="uid://d1vwxf574myr2" path="res://scenes/PizzaItem.tscn" id="10_choun"]
 [ext_resource type="AudioStream" uid="uid://4fj7whvcipub" path="res://assets/sfx/Ticking/Ticking1.wav" id="10_ya4ey"]
+[ext_resource type="Script" uid="uid://4xkdigyoejoh" path="res://scenes/time_text.gd" id="12_a8y0u"]
+[ext_resource type="Script" uid="uid://dit1ierxu70mp" path="res://scenes/end_game_timer.gd" id="13_trceg"]
 
 [sub_resource type="Theme" id="Theme_85g3d"]
 default_font = ExtResource("7_tipki")
 default_font_size = 60
 
 [node name="Main" type="Node2D" unique_id=84656414]
+process_mode = 3
 script = ExtResource("1_o6xl0")
 
 [node name="Player" parent="." unique_id=1030725472 instance=ExtResource("1_o5qli")]
 z_index = 1
 position = Vector2(175, 2321)
 
-[node name="EngineSounds" type="Node" parent="Player" unique_id=699857288]
+[node name="BikePedal" type="Node" parent="Player" unique_id=470699996]
+script = ExtResource("3_eb6dy")
+
+[node name="CrashSounds" type="Node" parent="Player" unique_id=699857288]
 script = ExtResource("3_tbgi4")
 
-[node name="CrashSounds" type="Node" parent="Player" unique_id=622684473]
+[node name="EngineSounds" type="Node" parent="Player" unique_id=622684473]
 script = ExtResource("2_sugp2")
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=364711367]
@@ -42,7 +49,7 @@ drag_vertical_enabled = true
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=281214681]
 stream = ExtResource("4_jyhfs")
-volume_db = -2.0
+volume_db = -5.0
 autoplay = true
 bus = &"Music"
 
@@ -89,12 +96,26 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -23.0
-offset_right = 119.0
+offset_top = -74.0
+offset_right = 240.0
 grow_vertical = 0
 size_flags_horizontal = 0
 text = "Pizza:"
 script = ExtResource("7_o6xl0")
+
+[node name="TimeText" type="Label" parent="CanvasLayer/Control" unique_id=1036943246]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -74.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Time Left:"
+script = ExtResource("12_a8y0u")
 
 [node name="Customer" type="Node2D" parent="." unique_id=464213208]
 
@@ -103,3 +124,9 @@ stream = ExtResource("10_ya4ey")
 volume_db = -8.0
 autoplay = true
 bus = &"SFX"
+
+[node name="EndGameTimer" type="Timer" parent="." unique_id=1092386326]
+wait_time = 10.0
+one_shot = true
+autostart = true
+script = ExtResource("13_trceg")

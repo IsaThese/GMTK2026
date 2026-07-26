@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://d1vwxf574myr2"]
 
-[ext_resource type="Script" uid="uid://csuddaquevnmm" path="res://scripts/generic_item.gd" id="1_w4y0k"]
+[ext_resource type="Script" uid="uid://csuddaquevnmm" path="res://scripts/inventory/generic_item.gd" id="1_w4y0k"]
 [ext_resource type="Texture2D" uid="uid://cgwf7ciyeuoar" path="res://assets/sprites/items/32x32Garlic.png" id="2_twkrw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_msjdp"]
@@ -11,7 +11,6 @@ z_index = 2
 
 [node name="ItemArea" type="Area2D" parent="." unique_id=1936191161]
 script = ExtResource("1_w4y0k")
-Name = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ItemArea" unique_id=60256851]
 shape = SubResource("CircleShape2D_msjdp")
@@ -20,4 +19,6 @@ shape = SubResource("CircleShape2D_msjdp")
 z_index = 3
 z_as_relative = false
 texture_filter = 1
+position = Vector2(8, -5)
+scale = Vector2(1.484375, 1.40625)
 texture = ExtResource("2_twkrw")
