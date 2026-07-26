@@ -1,5 +1,5 @@
 # project name
-NAME=gmtk-2026
+NAME=sustainable-delivery
 # paths to godot and butler executables
 GODOT=$(HOME)/bin/godot
 BUTLER=$(HOME)/bin/butler
