@@ -67,6 +67,7 @@ func _restart_game() -> void:
 	$CanvasLayer/Control.visible = Paused
 	$CanvasLayer/MiniMap.visible = Paused
 	$CanvasLayer/WinMenu.visible = Paused
+	SoundManager.StopSound(Sound.ID.Alarm)
 	$CanvasLayer/GameOverMenu.visible = !Paused
 	
 func _unhandled_input(event: InputEvent) -> void:

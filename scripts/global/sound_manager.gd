@@ -102,7 +102,7 @@ parameter: float = 0.0, _playIfAlreadyPlaying: bool = false) -> void:
 	var newSoundInstance := AudioStreamPlayer2D.new()
 	newSoundInstance.name = str(id)
 	newSoundInstance.bus = "SFX"
-	if(!sound_data.pausible):
+	if(!sound_data.pausible) or (id == Sound.ID.Alarm):
 		newSoundInstance.process_mode = Node.PROCESS_MODE_ALWAYS
 	var base_path: String = sound_data.path.get_basename() 
 	var extension: String = sound_data.path.get_extension() 
