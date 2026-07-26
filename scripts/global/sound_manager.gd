@@ -16,10 +16,11 @@ class SoundData:
 	var currentNoise : int
 	var hasParameter : bool
 	var parameterValue : float
+	var pausible : bool
 	
 	var loaded_streams : Array[AudioStream] = []
 	
-	func _init(resource_path: String, amount_of_noises: int = 1, chooseNoise : int = 1,
+	func _init(resource_path: String, amount_of_noises: int = 1, canPause:bool = false, chooseNoise : int = 1,
 	makeParameter : bool = false, setParameter : float = -1) -> void:
 		self.path = resource_path
 		self.hasParameter = makeParameter
@@ -31,6 +32,7 @@ class SoundData:
 		
 		self.path_base = resource_path.get_basename()
 		self.extension = resource_path.get_extension()
+		self.pausible = canPause
 		
 		for i in range(1, amount_of_noises + 1) :
 			var full_path := path_base + str(i) + "." + extension
@@ -56,12 +58,12 @@ class SoundData:
 #THE FILE MUST START END WITHOUT THE NUMBER
 func _ready() -> void:
 	sounds[Sound.ID.EngineStart] = SoundData.new("res://assets/sfx/Engine/EngineStart.wav")
-	sounds[Sound.ID.EngineRunning] = SoundData.new("res://assets/sfx/Engine/EngineRunning.wav")
+	sounds[Sound.ID.EngineRunning] = SoundData.new("res://assets/sfx/Engine/EngineRunning.wav", true)
 	sounds[Sound.ID.EngineEnd] = SoundData.new("res://assets/sfx/Engine/EngineEnd.wav")
 	sounds[Sound.ID.CarCrash] = SoundData.new("res://assets/sfx/Car_crash/Crash.wav")
 	sounds[Sound.ID.FastCrash] = SoundData.new("res://assets/sfx/Car_crash/FastCrash.wav")
 	sounds[Sound.ID.Ding] = SoundData.new("res://assets/sfx/Ding/Ding.wav", 3)
-	sounds[Sound.ID.Ticking] = SoundData.new("res://assets/sfx/Ticking/Ticking.wav")
+	sounds[Sound.ID.Ticking] = SoundData.new("res://assets/sfx/Ticking/Ticking.wav", 1, true)
 	sounds[Sound.ID.Pickup] = SoundData.new("res://assets/sfx/PickUp/PickUp.wav", 4)
 	sounds[Sound.ID.BikePedal] = SoundData.new("res://assets/sfx/BikePedal/BikePedal.wav")
 	sounds[Sound.ID.Alarm] = SoundData.new("res://assets/sfx/Alarm/Alarm.wav")
@@ -100,7 +102,8 @@ parameter: float = 0.0, _playIfAlreadyPlaying: bool = false) -> void:
 	var newSoundInstance := AudioStreamPlayer2D.new()
 	newSoundInstance.name = str(id)
 	newSoundInstance.bus = "SFX"
-	newSoundInstance.process_mode = Node.PROCESS_MODE_ALWAYS
+	if(!sound_data.pausible):
+		newSoundInstance.process_mode = Node.PROCESS_MODE_ALWAYS
 	var base_path: String = sound_data.path.get_basename() 
 	var extension: String = sound_data.path.get_extension() 
 	var soundPath: String = base_path + str(sound_data.currentNoise) + "." + extension
@@ -124,3 +127,4 @@ func StopSound(id: Sound.ID) -> void:
 			var audio_node :=  node_to_stop as AudioStreamPlayer2D
 			audio_node.queue_free()
 		sound_nodes.erase(id)
+		

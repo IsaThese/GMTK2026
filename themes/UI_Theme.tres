@@ -1,6 +1,6 @@
 [gd_resource type="Theme" format=3 uid="uid://bnxru8f1toqjo"]
 
-[ext_resource type="FontFile" uid="uid://ct518wg2icm2y" path="res://assets/fonts/PixeloidMono-nAOpP.ttf" id="1_arc7m"]
+[ext_resource type="FontFile" uid="uid://c32k6f2g0byd0" path="res://assets/fonts/T.H. Alphabet Soup Regular.ttf" id="1_arc7m"]
 
 [resource]
 default_font = ExtResource("1_arc7m")

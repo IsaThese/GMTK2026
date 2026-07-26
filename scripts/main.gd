@@ -57,3 +57,4 @@ func _restart_game() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if(Paused && event.is_action_pressed("restartGame", false, true)):
 		_restart_game()
+		
