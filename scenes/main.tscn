@@ -5,8 +5,8 @@
 [ext_resource type="Script" uid="uid://chxsv23lq2mav" path="res://scripts/sound/EmitEngine.gd" id="2_sugp2"]
 [ext_resource type="Script" uid="uid://wskfdf0kneps" path="res://scripts/sound/CrashSoundEmitter.gd" id="3_tbgi4"]
 [ext_resource type="AudioStream" uid="uid://cehc8p6k680lj" path="res://assets/sounds/level1_music.wav" id="4_jyhfs"]
-[ext_resource type="PackedScene" uid="uid://bldwt37h3nvk7" path="res://scenes/zone_1.tscn" id="5_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://cqynp8x866dno" path="res://scenes/mini_map.tscn" id="6_tefeu"]
+[ext_resource type="PackedScene" uid="uid://cwy5wy7ukixf0" path="res://scenes/zone_2.tscn" id="6_ya4ey"]
 [ext_resource type="Script" uid="uid://ds47hnp7a6qvn" path="res://scripts/inventory/items_collected.gd" id="7_o6xl0"]
 [ext_resource type="FontFile" uid="uid://ct518wg2icm2y" path="res://assets/fonts/PixeloidMono-nAOpP.ttf" id="7_tipki"]
 [ext_resource type="PackedScene" uid="uid://d1vwxf574myr2" path="res://scenes/PizzaItem.tscn" id="10_choun"]
@@ -21,6 +21,7 @@ script = ExtResource("1_o6xl0")
 
 [node name="Player" parent="." unique_id=1030725472 instance=ExtResource("1_o5qli")]
 z_index = 1
+position = Vector2(352, 4640)
 
 [node name="EngineSounds" type="Node" parent="Player" unique_id=699857288]
 script = ExtResource("3_tbgi4")
@@ -40,20 +41,19 @@ volume_db = -2.0
 autoplay = true
 bus = &"Music"
 
-[node name="Zone1" parent="." unique_id=662683130 instance=ExtResource("5_tbgi4")]
-metadata/_edit_lock_ = true
+[node name="Zone2" parent="." unique_id=2120611318 instance=ExtResource("6_ya4ey")]
 
-[node name="PizzaItem" parent="Zone1" unique_id=115788678 instance=ExtResource("10_choun")]
-position = Vector2(2, -88)
+[node name="PizzaItem" parent="Zone2" unique_id=115788678 instance=ExtResource("10_choun")]
+position = Vector2(570, 1680)
 
-[node name="PizzaItem2" parent="Zone1" unique_id=418530508 instance=ExtResource("10_choun")]
-position = Vector2(-248, -24)
+[node name="PizzaItem2" parent="Zone2" unique_id=418530508 instance=ExtResource("10_choun")]
+position = Vector2(320, 1744)
 
-[node name="PizzaItem3" parent="Zone1" unique_id=1256074955 instance=ExtResource("10_choun")]
-position = Vector2(-504, -40)
+[node name="PizzaItem3" parent="Zone2" unique_id=1256074955 instance=ExtResource("10_choun")]
+position = Vector2(64, 1728)
 
-[node name="PizzaItem4" parent="Zone1" unique_id=243043183 instance=ExtResource("10_choun")]
-position = Vector2(-8, -424)
+[node name="PizzaItem4" parent="Zone2" unique_id=243043183 instance=ExtResource("10_choun")]
+position = Vector2(560, 1344)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1983740822]
 
@@ -61,16 +61,14 @@ position = Vector2(-8, -424)
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -264.0
+offset_left = -104.0
 offset_right = 0.0
-offset_bottom = 264.0
+offset_bottom = 200.0
 grow_horizontal = 0
-zone_node = NodePath("../../Zone1")
+zone_node = NodePath("../../Zone2")
 player_node = NodePath("../../Player")
 target_node = NodePath("../../Customer")
-map_size = Vector2(256, 256)
-
-[node name="Customer" type="Node2D" parent="." unique_id=464213208]
+map_size = Vector2(96, 192)
 
 [node name="Control" type="Control" parent="CanvasLayer" unique_id=1605000859]
 layout_mode = 3
@@ -92,6 +90,8 @@ grow_vertical = 0
 size_flags_horizontal = 0
 text = "Pizza:"
 script = ExtResource("7_o6xl0")
+
+[node name="Customer" type="Node2D" parent="." unique_id=464213208]
 
 [node name="Ticking" type="AudioStreamPlayer" parent="." unique_id=713140104]
 stream = ExtResource("10_ya4ey")
