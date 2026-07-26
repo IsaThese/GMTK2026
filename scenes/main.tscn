@@ -21,7 +21,7 @@ script = ExtResource("1_o6xl0")
 
 [node name="Player" parent="." unique_id=1030725472 instance=ExtResource("1_o5qli")]
 z_index = 1
-position = Vector2(352, 4640)
+position = Vector2(175, 2321)
 
 [node name="EngineSounds" type="Node" parent="Player" unique_id=699857288]
 script = ExtResource("3_tbgi4")
@@ -30,7 +30,12 @@ script = ExtResource("3_tbgi4")
 script = ExtResource("2_sugp2")
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=364711367]
+zoom = Vector2(2, 2)
 process_callback = 0
+limit_left = 0
+limit_top = 0
+limit_right = 768
+limit_bottom = 2400
 position_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
@@ -97,3 +102,4 @@ script = ExtResource("7_o6xl0")
 stream = ExtResource("10_ya4ey")
 volume_db = -8.0
 autoplay = true
+bus = &"SFX"

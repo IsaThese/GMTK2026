@@ -2,6 +2,7 @@ class_name PlayerClass extends CharacterBody2D
 
 # Settings
 @export_range(0, 1, 0.05) var TurningManeuverability := 0.8
+@export var is_bike = false
 
 var inventory:InventoryManager
 const ACCELERATION = 300
@@ -23,8 +24,24 @@ signal collision_detected(impact_force: float, player_speed: float)
 var facing := Vector2.LEFT
 
 
+var sprite_node: Node2D = null
+var collision_node: Node2D = null
+
+
 func _init() -> void:
 	velocity = Vector2.ZERO
+
+
+func _ready() -> void:
+	is_bike = is_bike or Controls.BikeCity
+	sprite_node = $BikeSprite if is_bike else $CarSprite
+	collision_node = $BikeCollision if is_bike else $CarCollision
+	$BikeCollision.disabled = !is_bike
+	$CarCollision.disabled = is_bike
+	$BikeSprite.visible = is_bike
+	$CarSprite.visible = !is_bike
+	set_collision_layer_value(2, !is_bike)
+	set_collision_mask_value(2, !is_bike)
 
 
 func _get_turning_speed() -> float:
@@ -136,8 +153,8 @@ func _physics_process(delta: float) -> void:
 func _process(_delta: float) -> void:
 	$Debug/Direction.points[1] = facing * 40
 	$Debug/VelDirection.points[1] = velocity
-	$CollisionShape2D.rotation = Vector2.UP.angle_to(facing)
-	$Sprite2D.rotation = Vector2.LEFT.angle_to(facing)
+	collision_node.rotation = Vector2.DOWN.angle_to(facing)
+	sprite_node.rotation = Vector2.DOWN.angle_to(facing)
 
 
 func get_speed_percentage() -> float:
