@@ -159,6 +159,10 @@ _data = {
 &"move_up": SubResource("Animation_ii46f")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o30fd"]
+radius = 8.0
+height = 32.0
+
 [node name="BikeSprite" type="Node2D" unique_id=69154377]
 script = ExtResource("1_o30fd")
 
@@ -173,3 +177,8 @@ region_rect = Rect2(0, 0, 96, 144)
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1675777522]
 root_node = NodePath("../Sprite2D")
 libraries/ = SubResource("AnimationLibrary_0e776")
+
+[node name="StaticBody" type="StaticBody2D" parent="." unique_id=774804890]
+
+[node name="BikeCollision" type="CollisionShape2D" parent="StaticBody" unique_id=1610123539]
+shape = SubResource("CapsuleShape2D_o30fd")

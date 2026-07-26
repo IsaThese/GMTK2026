@@ -9,6 +9,9 @@ const base_dir := Vector2.DOWN
 
 func _ready() -> void:
 	sprite.region_rect.position.y = 0 if is_player else sprite.region_rect.size.y
+	
+	if is_player:
+		$StaticBody.queue_free()
 
 func _process(_delta: float) -> void:
 	var rot := global_rotation_degrees

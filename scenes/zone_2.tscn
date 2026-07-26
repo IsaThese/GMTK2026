@@ -2,9 +2,34 @@
 
 [ext_resource type="TileSet" uid="uid://bytjfbvefmy86" path="res://scenes/tile_set.tres" id="1_ui31h"]
 [ext_resource type="Texture2D" uid="uid://cp1dahpq26p3f" path="res://assets/sprites/pizzeria.png" id="2_vqavc"]
+[ext_resource type="PackedScene" uid="uid://bmar8u5rj7aec" path="res://scenes/vehicle_spawner.tscn" id="3_vqavc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vqavc"]
 size = Vector2(140, 80)
+
+[sub_resource type="Curve2D" id="Curve2D_hadne"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 586, 2451, 7.899936, 38.709686, -7.899936, -38.709686, 584, 1427, -27.8942, 1.4490066, 27.8942, -1.4490066, 633, 1376, 0, 0, 0, 0, 808, 1375)
+}
+point_count = 4
+
+[sub_resource type="Curve2D" id="Curve2D_8al6t"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -130, 1377, -51.78231, 0.4665073, 51.78231, -0.4665073, 479, 1375, 0, -36.854076, 0, 36.854076, 541, 1432, 0.4665073, -46.184223, -0.4665073, 46.184223, 537, 1676, 38.253597, 0, -38.253597, 0, 490, 1729, 0, 0, 0, 0, -98, 1724)
+}
+point_count = 6
+
+[sub_resource type="Curve2D" id="Curve2D_r4c7t"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -90, 1766, -43.385178, 2.3325365, 43.385178, -2.3325365, 495, 1764, 0.4665073, -54.581352, -0.4665073, 54.581352, 545, 1833, 0, 0, 0, 0, 539, 2501)
+}
+point_count = 4
+
+[sub_resource type="Curve2D" id="Curve2D_jasyu"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 877, 1337, 0, 0, 0, 0, -146, 1332)
+}
+point_count = 2
 
 [node name="Zone2" type="Node2D" unique_id=2120611318]
 
@@ -31,3 +56,19 @@ shape = SubResource("RectangleShape2D_vqavc")
 
 [node name="Marker2D" type="Marker2D" parent="CustomerPositions" unique_id=440439647]
 position = Vector2(423, 204)
+
+[node name="Paths" type="Node2D" parent="." unique_id=433391214]
+
+[node name="VehicleSpawner" parent="Paths" unique_id=450481522 instance=ExtResource("3_vqavc")]
+curve = SubResource("Curve2D_hadne")
+
+[node name="VehicleSpawner2" parent="Paths" unique_id=1170614475 instance=ExtResource("3_vqavc")]
+curve = SubResource("Curve2D_8al6t")
+
+[node name="VehicleSpawner3" parent="Paths" unique_id=407820264 instance=ExtResource("3_vqavc")]
+curve = SubResource("Curve2D_r4c7t")
+
+[node name="VehicleSpawner4" parent="Paths" unique_id=788276806 instance=ExtResource("3_vqavc")]
+curve = SubResource("Curve2D_jasyu")
+
+[node name="Node2D" type="Node2D" parent="." unique_id=1710267849]
