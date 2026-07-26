@@ -86,9 +86,12 @@ parameter: float = 0.0, _playIfAlreadyPlaying: bool = false) -> void:
 		return 
 	if(sound_data.hasParameter) :
 		sound_data.parameterValue = parameter
+	## Nodes don't get deleted or something properly when reloading game
 	if sound_nodes.has(id) && !_playIfAlreadyPlaying:
-		var stream := sound_nodes.get(id) as AudioStreamPlayer2D
-		assert(stream != null, "Was expecting node with similar name to be AudioStreamPlayer2D")
+		var stream = sound_nodes.get(id)
+		if(stream == null) : 
+			sound_nodes.erase(id)
+			return;
 		stream.pitch_scale = pitch
 		stream.volume_db = linear_to_db(volume)
 		return;
@@ -115,6 +118,8 @@ parameter: float = 0.0, _playIfAlreadyPlaying: bool = false) -> void:
 	
 func StopSound(id: Sound.ID) -> void:
 	if sound_nodes.has(id):
-		var node_to_stop := sound_nodes.get(id) as AudioStreamPlayer2D
+		var node_to_stop = sound_nodes.get(id)
+		if is_instance_valid(node_to_stop):
+			var audio_node :=  node_to_stop as AudioStreamPlayer2D
+			audio_node.queue_free()
 		sound_nodes.erase(id)
-		node_to_stop.queue_free()

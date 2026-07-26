@@ -9,14 +9,10 @@
 [ext_resource type="PackedScene" uid="uid://cqynp8x866dno" path="res://scenes/mini_map.tscn" id="6_tefeu"]
 [ext_resource type="PackedScene" uid="uid://cwy5wy7ukixf0" path="res://scenes/zone_2.tscn" id="6_ya4ey"]
 [ext_resource type="Script" uid="uid://ds47hnp7a6qvn" path="res://scripts/inventory/items_collected.gd" id="7_o6xl0"]
-[ext_resource type="FontFile" uid="uid://ct518wg2icm2y" path="res://assets/fonts/PixeloidMono-nAOpP.ttf" id="7_tipki"]
 [ext_resource type="PackedScene" uid="uid://d1vwxf574myr2" path="res://scenes/PizzaItem.tscn" id="10_choun"]
+[ext_resource type="Theme" uid="uid://bnxru8f1toqjo" path="res://themes/UI_Theme.tres" id="11_trceg"]
 [ext_resource type="Script" uid="uid://4xkdigyoejoh" path="res://scenes/time_text.gd" id="12_a8y0u"]
 [ext_resource type="Script" uid="uid://dit1ierxu70mp" path="res://scenes/end_game_timer.gd" id="13_trceg"]
-
-[sub_resource type="Theme" id="Theme_85g3d"]
-default_font = ExtResource("7_tipki")
-default_font_size = 60
 
 [node name="Main" type="Node2D" unique_id=84656414]
 process_mode = 3
@@ -25,7 +21,6 @@ script = ExtResource("1_o6xl0")
 [node name="Player" parent="." unique_id=1030725472 instance=ExtResource("1_o5qli")]
 z_index = 1
 position = Vector2(175, 2321)
-is_bike = true
 
 [node name="BikePedal" type="Node" parent="Player" unique_id=470699996]
 script = ExtResource("3_eb6dy")
@@ -95,7 +90,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_85g3d")
+theme = ExtResource("11_trceg")
 
 [node name="ItemsCollected" type="Label" parent="CanvasLayer/Control" unique_id=1214847683]
 layout_mode = 1
@@ -122,5 +117,30 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "Time Left:"
 script = ExtResource("12_a8y0u")
+
+[node name="PauseMenu" type="Control" parent="CanvasLayer" unique_id=256948815]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("11_trceg")
+
+[node name="Label" type="Label" parent="CanvasLayer/PauseMenu" unique_id=1180598060]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -87.5
+offset_top = -11.5
+offset_right = 87.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Press Space To Restart"
 
 [node name="Customer" type="Node2D" parent="." unique_id=464213208]

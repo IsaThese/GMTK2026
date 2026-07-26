@@ -22,7 +22,23 @@ func _ready() -> void:
 	
 	SoundManager.PlaySound(Sound.ID.Ticking, $Player)
 func _game_lose() -> void:
-	get_tree().paused = true
+	Paused = true
+	get_tree().paused = Paused
 	SoundManager.StopSound(Sound.ID.Ticking)
 	SoundManager.PlaySound(Sound.ID.Alarm, $Player)
-	Paused = true
+	$CanvasLayer/Control.visible = !Paused
+	$CanvasLayer/MiniMap.visible = !Paused
+	$CanvasLayer/PauseMenu.visible = Paused
+	
+func _restart_game() -> void:
+	Paused = false;
+	get_tree().paused = Paused;
+	get_tree().reload_current_scene()
+	$CanvasLayer/Control.visible = Paused
+	$CanvasLayer/MiniMap.visible = Paused
+	$CanvasLayer/PauseMenu.visible = !Paused
+	
+func _unhandled_input(event: InputEvent) -> void:
+	if(Paused && event.is_action_pressed("restartGame", false, true)):
+		_restart_game()
+	
